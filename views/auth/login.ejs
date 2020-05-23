@@ -1,0 +1,80 @@
+<%- include ('../includes/head.ejs') %>
+
+<link rel="stylesheet" type="text/css" href="css/create.css">
+
+<body>
+	
+	<div class="container whole">
+		<div class="inner-container ">
+			
+			<form method="POST" action="/login">
+				<span class="login100-form-title p-b-49" style="color: black;">
+					login
+				</span>
+				
+				<div class="form-group" >
+				  <label for="exampleInputUsername">Username</label>
+				  <input class="input100 <%= validationErrors.find(e =>e.param === 'username') ? 'invalid' : '' %>"
+					   type="text" 
+					   name="username" 
+					   value = "<%= oldInput.username %>" 
+					   placeholder="Type your username" style="color: #777 !important;">
+				  <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+				</div>
+
+				<div class="form-group ">
+				  <label for="exampleInputPassword1">Password</label>
+				  <input class="input100 <%= validationErrors.find(e =>e.param === 'password') ? 'invalid' : '' %>"
+					  type="password" 
+					  name="password" 
+					  value="<%= oldInput %>" 
+					  placeholder="Type your password" style="color: #777 !important;">
+				</div>	
+				
+				<% if (errorMessage) { %> 
+					<div class="user-message user-message--error"><%= errorMessage %></div>
+				<% } %>
+				
+				<div class="text-right p-t-8 p-b-31">
+					<a href="#" style="color: #555">
+						Forgot password?
+					</a>
+				</div>
+
+				<button type="submit" class="login100-form-btn" id="login-btn" >
+					Login
+				</button>
+			</form>
+
+			<div class="txt1 text-center p-t-54 p-b-20">
+				<span>
+					Or Login Using
+				</span>
+			</div>
+	
+			<div class="flex-c-m">
+				<a href="#" class="login100-social-item bg1">
+					<i class="fa fa-facebook"></i>
+				</a>
+	
+				<a href="#" class="login100-social-item bg2">
+					<i class="fa fa-twitter"></i>
+				</a>
+	
+				<a href="auth/google" class="login100-social-item bg3">
+					<i class="fa fa-google"></i>
+				</a>
+			</div>
+
+		</div>
+	</div>
+
+
+	<div id="dropDownSelect1"></div>
+
+</body>
+
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+	<script scr="main.js"></script> -->
+
+</html>

@@ -1,0 +1,42 @@
+
+
+.whole {
+    height: 100%;
+    width: 100%;
+    background-color: rgba(255,255,255,.15);
+}
+
+.inner-container {
+    /* background-color: black; */
+    margin: 10% auto 0;
+    max-width: 80%;
+    /* border: 2px solid black; */
+}
+
+#exampleInputUsername {
+    background: transparent;
+    border: none;
+}
+
+#exampleInputEmail1 {
+    background: transparent;
+    border: none;
+}
+
+#exampleInputPassword1 {
+    background: transparent;
+    border: none;
+}
+
+.user-message {
+    /* position: absolute; */
+    /* margin-top: 61%; */
+    text-align: center;
+    color: red;
+    padding: 10px 25px;
+    /* border: 1.5px solid rgb(234, 0, 255); */
+    border-radius: 15px;
+    font-size: 16px;
+    font-family: Poppins-Regular;
+}
+

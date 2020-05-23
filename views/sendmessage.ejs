@@ -1,0 +1,47 @@
+<%- include ('./includes/head.ejs') %>
+
+<link rel="stylesheet" type="text/css" href="css/create.css">
+</head>
+<body>
+	<div class="container whole">
+		<div class="inner-container ">
+				<span class="login100-form-title p-b-10">
+					Anonymous Replies
+				</span>
+                
+                <form class="login100-form validate-form" method="POST" action="/<%= username %>">
+					<span class="login100-form-title p-b-79 m-t-60 " style="font-size: 20px;">
+						Send your Anonymous Message
+                    </span>
+                    
+                    <div class="form-group">
+                        <span class="label-input100">Message</span>
+                        <label for="exampleFormControlTextarea1"></label>
+                        <textarea class="form-control" id="message-text"  name="message" rows="3" placeholder="Say something here ..."  ></textarea>
+                    </div>
+
+                    <br>
+					
+					<div class="container-login100-form-btn">
+						<div class="wrap-login100-form-btn">
+                            <div class="login100-form-bgbtn"></div>
+                            <a href="">
+                                <button class="login100-form-btn" id="signup-btn" type="submit">
+                                   Send Message
+                                </button>
+                            </a>
+						</div>
+					</div>
+				</form>
+
+		</div>
+	</div>
+
+	<div id="dropDownSelect1"></div>
+
+</body>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+	<script scr="main.js"></script>
+
+</html>

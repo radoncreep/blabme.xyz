@@ -1,0 +1,30 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" type="text/css" href="css/create.css">
+</head>
+
+<body>
+
+    <div class="inner-container">
+        <span class="login100-form-title p-b-49" style="color: black; font-size: 26px !important;">
+            Reset Password
+        </span>
+
+        <% if (errorMessage) { %>
+            <div class="user-message user-message--error"><%= errorMessage %></div>
+        <% } %>
+
+        <form action="/reset" method="POST">
+            <div class="form-group">
+                <label for="exampleInputResetPassword">Account Email</label>
+                <input 
+                    type="email" 
+                    class="form-control <%= validationErrors.find(e =>e.param === 'email') ? 'invalid' : '' %>"
+                    id="exampleInputEmail1" 
+                    name="email" 
+                    value="<%= oldInput.email %>" 
+                    placeholder="Type in your Email - Address">
+                <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                <button  class="login100-form-btn" id="login-btn" type="submit" style="margin-top: 40px;">Reset Password</button>
+            </div>
+        </form>
+    </div>

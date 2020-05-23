@@ -1,0 +1,83 @@
+
+<%- include ('../includes/head.ejs') %>
+
+<link rel="stylesheet" type="text/css" href="css/create.css">
+<!-- <link rel="stylesheet" type="text/css" href="css/util.css"> -->
+<!-- <link rel="stylesheet" type="text/css" href="css/main.css"> -->
+</head>
+
+<body>
+	
+	<div class="container whole">
+		<div class="inner-container ">
+			
+			<form method="POST" action="/signup">
+				<span class="login100-form-title p-b-49" style="color: black;">
+                    Sign up
+				</span>
+				
+				<div class="form-group">
+				  <label for="exampleInputUsername">Username</label>
+				  <input type="username"
+				   	class="form-control <%= validationErrors.find(e =>e.param === 'username') ? 'invalid' : '' %>" 
+					   id="exampleInputUsername" 
+					   aria-describedby="emailHelp" 
+					   name="username"  
+					   value="<%= oldInput.username %>" placeholder="Type your username">
+				  <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+				</div>
+	
+				<div class="form-group">
+					<label for="exampleInputEmail1">Email</label>
+					<input 
+						type="email" 
+						class="form-control <%= validationErrors.find(e =>e.param === 'email') ? 'invalid' : '' %>"
+						id="exampleInputEmail1" 
+						name="email" 
+						value="<%= oldInput.email %>" 
+						placeholder="Type in your Email - Address">
+					<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+				</div>
+	
+				<div class="form-group">
+				  <label for="exampleInputPassword1">Password</label>
+				  <input type="password"
+					   class="form-control <%= validationErrors.find(e =>e.param === 'password') ? 'invalid' : '' %>" 
+					   id="exampleInputPassword1" 
+					   name="password" 
+					   placeholder="Type your password">
+				</div>
+
+				<% if (errorMessage) { %> 
+					<div class="user-message user-message--error"><%= errorMessage %></div>
+				<% } %>
+				
+				<!-- <div class="form-group form-check">
+				  <input type="checkbox" class="form-check-input" id="exampleCheck1">
+				  <label class="form-check-label" for="exampleCheck1">Check me out</label>
+				</div> -->
+				<button type="submit" class="btn btn-primary">
+					Submit</button>
+			  </form>
+		</div>
+
+		<div class="txt1 text-center p-t-54 p-b-20">
+			<span>
+				Or Sign Up Using
+			</span>
+		</div>
+
+		<div class="flex-c-m">
+			<a href="auth/google" class="login100-social-item bg3">
+				<i class="fa fa-google"></i>
+			</a>
+		</div>
+	</div>
+
+	<div id="dropDownSelect1"></div>
+	
+
+
+</body>
+
+</html>

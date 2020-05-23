@@ -1,0 +1,74 @@
+<%- include ('./includes/head.ejs') %>
+	
+<link rel="stylesheet" type="text/css" href="css/profile.css">
+</head>
+<body>
+	<div class="container whole">
+		<div class="inner-container ">
+			<form>
+				<span class="login100-form-title p-b-10" style="color: black;">
+					<h3 style="display: inline-block;">hi</h3> <%= profileName %>
+				</span>
+				
+				<div class="wrap container text-center m-b-50" >
+					<input class="font-weight-bold" id="link-input" type="text" value="<%= userLink %>">
+					<button class="" id="select-link"><img src="https://img.icons8.com/material-rounded/24/000000/copy-link.png"/></button>
+				</div>
+
+				<div class="container p-b-54 text-white">
+					<p class="text-light">
+						Share your profile link above on other socials
+						to get messages from anonymous users.
+					</p>
+				</div>
+				
+				
+				<div class="container-login100-form-btn">
+					<div class="wrap-login100-form-btn">
+						<div class="login100-form-bgbtn"></div>
+						<button class="login100-form-btn" id="messages-btn" >
+							<a href="messages" style="font-family: Poppins-Medium; font-size: 16px; color: #fff;">Your Messages</a>
+						</button>
+					</div>
+				</div>
+				<br>
+				<div class="container-login100-form-btn">
+					<div class="wrap-login100-form-btn">
+						<div class="login100-form-bgbtn"></div>
+						<button class="login100-form-btn" id="whatsapp">
+							Share on whatsapp
+						</button>
+					</div>
+				</div>
+				<br>
+				<div class="container-login100-form-btn">
+					<div class="wrap-login100-form-btn">
+						<div class="login100-form-bgbtn"></div>
+						<button class="login100-form-btn" id="twitter">
+							Share on twitter
+						</button>
+					</div>
+				</div>
+				<br>
+				<div class="container text-center m-t-35 m-b-40 border border-info roundedl p-t-15 p-b-20 p-r-20" style="width: 25rem;">
+					<a class="text-light " href="">
+						In case of forgetten password, Please include your email to
+						be provided with a reset link. Simply click here.
+					</a>
+				</div>
+				
+			</form>
+
+		</div>
+	</div>
+
+	<div id="dropDownSelect1"></div>
+	<script src="link.js"></script>
+
+</body>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+	<script scr="main.js"></script>
+	
+
+</html>

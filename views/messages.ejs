@@ -1,0 +1,54 @@
+<%- include ('./includes/head.ejs') %>
+
+<link rel="stylesheet" type="text/css" href="css/messages.css">
+
+
+</head>
+<body>
+
+	<div class="container whole">
+		<div class="inner-container ">
+			<span class="login100-form-title p-b-30">
+				Anonymous Replies
+			</span>
+			
+			<% if (replies.length > 0) { %> 
+				<% for (reply of replies) { %> 
+					<div class="container text-left msg-wrapper m-b-25" style="max-width: 100%; border:medium double#c645c7; border-radius: 15px;">
+						<p  class="p-b-15 p-t-15" style="font-size: medium; color: black; overflow: hidden;
+						word-wrap: break-word;">
+							Message from <%= 'anonymous user ' + reply.sender %> : <br>
+							<%= reply.body %>
+							<br>
+							<%= reply.createdAt %>
+						</p>
+					</div>
+				<% } %>
+
+
+			<% } else { %> 
+				<div class="container text-left m-t-50 m-b-100 msg-wrapper">
+					<p  class="p-b-50 p-t-55 m-r-0" style="font-size: large; color: black; overflow: hidden;
+					word-wrap: break-word;">
+						Hey there <%= assocUser %>! You have no message for now.
+						I do for you tho --- Thanks for the support. God bless you ❤️
+					</p>
+				</div>
+			<% } %>
+			
+			<div class=" text-center m-b-50">
+				<!-- <button type="button" class="btn btn-dark" onclick="history.back()>Back</button> -->
+				<input type="button"  class="back-btn" value="back" onclick="history.back()">
+			</div>
+			
+		</div>
+	</div>
+
+	<div id="dropDownSelect1"></div>
+
+</body>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+	<script scr="main.js"></script>
+
+</html>

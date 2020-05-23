@@ -1,0 +1,38 @@
+{
+  "name": "looooooolll",
+  "version": "1.0.0",
+  "description": "anonymous messaging",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app",
+    "dev": "nodemon app"
+  },
+  "author": "heheheheh",
+  "license": "MIT",
+  "dependencies": {
+    "@sendgrid/mail": "^7.1.0",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "connect-flash": "^0.1.1",
+    "connect-mongodb-session": "^2.3.1",
+    "cors": "^2.8.5",
+    "crypto-js": "^4.0.0",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.0.2",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "express-validator": "^6.4.0",
+    "jsonwebtoken": "^8.5.1",
+    "moment": "^2.24.0",
+    "mongoose": "^5.9.7",
+    "morgan": "^1.10.0",
+    "nodemailer": "^6.4.6",
+    "nodemailer-sendgrid-transport": "^0.2.0",
+    "passport": "^0.4.1",
+    "passport-google-oauth20": "^2.0.0",
+    "web-push": "^3.4.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}

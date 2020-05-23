@@ -1,0 +1,29 @@
+
+
+.whole {
+    height: 100%;
+    width: 100%;
+    background-color: rgba(255,255,255,.15);
+}
+
+.inner-container {
+    /* background-color: black; */
+    margin: 30% auto 0;
+    max-width: 80%;
+    /* border: 2px solid black; */
+}
+
+#exampleInputUsername {
+    background: transparent;
+    border: none;
+}
+
+#exampleInputEmail1 {
+    background: transparent;
+    border: none;
+}
+
+#exampleInputPassword1 {
+    background: transparent;
+    border: none;
+}
