@@ -5,7 +5,8 @@ const User = require('../models/user');
 
 require('dotenv').config();
 
-console.log('this is client ' + process.env.CLIENTIDKEY);
+// console.log('this is client ' + process.env.CLIENTIDKEY);
+// console.log('this is client secret ' + process.env.CLIENTSECRETKEY);
 
 passport.serializeUser((user, done) => {
     done(null, user.id)
@@ -23,8 +24,8 @@ passport.deserializeUser((id, done) => {
 passport.use(new GoogleStrategy({
     //options for google strategy
     callbackURL: '/auth/google/redirect',
-    clientID: '130834142908-47jlp0apvbgmgccv0mc5ikr8q093k9pa.apps.googleusercontent.com',
-    clientSecret: 'faOdG_x4JthawmxNqIhkyVJL'
+    clientID: process.env.CLIENTIDKEY,
+    clientSecret: process.env.CLIENTSECRETKEY
 }, (accessToken, refreshToken, profile, done) => {
     //passport callback function
     // console.log(profile);

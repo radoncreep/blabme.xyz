@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
-const { validationResult } = require('express-validator/check');
+const { validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const sgMail = require('@sendgrid/mail');

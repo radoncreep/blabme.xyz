@@ -9,7 +9,6 @@ const MongoDBStore = require('connect-mongodb-session')(session);
 const flash = require('connect-flash');
 const passport = require('passport');
 const passportSetup = require('./config/passport-setup');
-const webpush = require('web-push');
 require('dotenv').config();
 
 
@@ -34,30 +33,6 @@ const store = new MongoDBStore({
     uri: MONGOBD_URI,
     collection: 'sessionsdb'
 });
-
-//the keys verify who is sending the push notification
-const publicVapidKey = process.env.PUBLICVAPIDKEY;
-const privateVapidKey = process.env.PRIVATEVAPIDKEY;
-
-webpush.setVapidDetails('mailto:test@tes.com', publicVapidKey, privateVapidKey);
-
-app.get('/client', (req, res) => {
-    res.render('./client/client')
-})
-//subscribe route
-app.post('/subscribe', (req, res, next) => {
-    //Get pushSubscription object
-    const subscription = req.body
-
-    //Send 201 - status code
-    res.status(201).json({});
-
-    //Create payLoad
-    const payload = JSON.stringify({ title: "Push Test" });
-
-    // Pass object into sendNotification
-    webpush.sendNotification(subscription, payload).catch(err => console.log(err));
-})
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
