@@ -21,6 +21,7 @@ const app = express();
 
 //It is very important to arrange your routing so one route doesnt get mixed up with others
 const User = require('./models/user');
+const homeRoute = require('./routes/homepage');
 const userRoute = require('./routes/users');
 const msgRoute = require('./routes/messages');
 
@@ -49,7 +50,10 @@ app.use(session({
     secret: process.env.SECRET,
     resave: false, 
     saveUninitialized: false,
-    store: store
+    store: store,
+    cookie: {
+        maxAge: 24 * 60 * 60 * 1000
+    }
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -83,6 +87,7 @@ app.use((req, res, next) => {
 });
 
 //also here, arranging routes is important
+app.use(homeRoute);
 app.use(userRoute);
 app.use(msgRoute);
 

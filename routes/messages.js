@@ -18,6 +18,14 @@ router.post('/:username',
     [
         body('message').isLength({ min: 7 })
     ],
-    messageController.createMessages);
+    messageController.createMessages
+);
+
+// router.get('/delivered', (req, res, next) => {
+//     res.render('/derlivered', {
+//         pagetTitle: 'Successful',
+//         path: '/delivered'
+//     });
+// });
 
 module.exports = router;

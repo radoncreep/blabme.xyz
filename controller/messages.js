@@ -20,10 +20,6 @@ exports.getMessages = (req, res, next) => {
                 sender: result.sender
                 // isAuthenticated: req.session.islogged
             })
-            // console.log('Here is the result ' + result)
-            // res.status(200).json({
-            //     message: result
-            // })
         })
         .catch(err => console.log(err));
 };
@@ -76,13 +72,14 @@ exports.createMessages = (req, res, next) => {
                 sender: Math.floor(Math.random() * 365)
             });
             user.messages.push(message)
-            // user.save()
             return message.save()           
         })
         .then(result => {
-           return res.send("message delivered")
+           res.render('delivered', {
+               pageTitle: 'successful',
+               path: '/delivered'
+           });
         })
-    
         .catch(err => {
             if (!err.statusCode) {
                 err.statusCode = 500;
