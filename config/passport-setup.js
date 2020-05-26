@@ -54,7 +54,7 @@ passport.use(new GoogleStrategy({
                     done(null, newUser);
                     const msg = {
                         to: email,
-                        from: 'victoronyinyeme@gmail.com',
+                        from: '************',
                         subject: 'Blabme - Incognito Messaging' ,
                         text: 'Anonymous delivery',
                         html: `

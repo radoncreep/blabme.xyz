@@ -15,17 +15,17 @@
 
 #exampleInputUsername {
     background: transparent;
-    border: none;
+    border: 1px solid #00000059;
 }
 
 #exampleInputEmail1 {
     background: transparent;
-    border: none;
+    border: 1px solid #00000059;
 }
 
 #exampleInputPassword1 {
     background: transparent;
-    border: none;
+    border: 1px solid #00000059;
 }
 
 .user-message {
