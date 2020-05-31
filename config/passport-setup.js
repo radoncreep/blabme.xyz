@@ -47,18 +47,21 @@ passport.use(new GoogleStrategy({
                     done(null, newUser);
                     const msg = {
                         to: email,
-                        from: '************',
-                        subject: 'Blabme - Incognito Messaging' ,
+                        from: 'blabmexyz@gmail.com',
+                        subject: 'Blabme - Anonymous Messaging' ,
                         text: 'Anonymous delivery',
                         html: `
                         <h1 style="color: #fc00ff">Welcome</h1>
-                        <p>Hi there, thank you for using Incognito messaging,
-                        this version is a prototype but your welcome to explore.
+                        <p>Hi there, thank you for using blabme mobile first incognito messaging,
+                        This is our very first launch and we hope you progress with us as we keep bringing
+                        cool features and services to the platform.
                         </p>
                         <br>
-                        <p>Your email is secure and would not be given out</p>
+                        <p>STAY ANONYMOUS!</p>
+                        <span style="color:#D3D3D3; font-size: 12px;">Your email is secure and would not be given out</span>
                         <br>
-                        <p>STAY ACTIVE!</p>
+        
+                        <p style="color:#D3D3D3; font-size: 10px;>Copyright ©2020, RC~Dev</p>
                         `
                     };
                     sgMail.send(msg)

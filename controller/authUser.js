@@ -77,13 +77,13 @@ exports.postSignup = (req, res, next) => {
             // Message Object
             const msg = {
                 to: email,
-                from: 'victoronyinyeme@gmail.com',
+                from: 'blabme.xyz@gmail.com',
                 subject: 'Anonymous Messaging' ,
                 text: 'Anonymous delivery',
                 html: `
                 <h1 style="color: #fc00ff">Welcome</h1>
                 <p>Hi there, thank you for using blabme mobile first incognito messaging,
-                This is our very first launch and we hope you progress with as we keep bringing
+                This is our very first launch and we hope you progress with us as we keep bringing
                 cool features and services to the platform.
                 </p>
                 <br>
@@ -309,7 +309,7 @@ exports.postReset = (req, res, next) => {
                     text: 'You requested password reset for this account',
                     html: `
                     <p>Use the link to reset your account password</p>
-                    <p>Click this <a href="http://localhost:8080/reset/${token}">link</a> to set a new password.</p>
+                    <p>Click this <a href="http://blabme.xyz/reset/${token}">link</a> to set a new password.</p>
                 `
                 }
                 sgMail.send(msg) //this returns a promise
