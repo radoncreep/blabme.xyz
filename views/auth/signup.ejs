@@ -23,7 +23,7 @@
 					   id="exampleInputUsername" 
 					   aria-describedby="emailHelp" 
 					   name="username"  
-					   value="<%= oldInput.username %>"
+					   value="<%=oldInput.username%>"
 					   placeholder="Type in your username">
 				  <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
 				</div>
@@ -35,7 +35,7 @@
 						class="form-control <%= validationErrors.find(e =>e.param === 'email') ? 'invalid' : '' %>"
 						id="exampleInputEmail1" 
 						name="email" 
-						value="<%= oldInput.email %>" 
+						value="<%=oldInput.email%>" 
 						placeholder="Type in your Email - Address">
 					<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
 				</div>

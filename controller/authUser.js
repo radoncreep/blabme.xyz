@@ -4,9 +4,9 @@ const { validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const sgMail = require('@sendgrid/mail');
-const crypto = require('crypto-js')
+const crypto = require('crypto');
 
-console.log(process.env.SENDGRID_API_KEY);
+
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 //deprecated
@@ -14,7 +14,6 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 // const sendgridTransport = require('nodemailer-sendgrid-transport');
 
 const Users = require('../models/user');
-
 
 
 exports.getSignup = async (req, res, next) => {
@@ -31,31 +30,24 @@ exports.getSignup = async (req, res, next) => {
         pageTitle: 'Signup',
         errorMessage: message,
         oldInput: {
-            username: ' ',
-            email: ' ',
-            password: ' ',
+            username: '',
+            email: '',
+            password: '',
         },
-        validationErrors: [ ]
+        validationErrors: []
     });
 };
 
 //Check if user exist before signing the user up
 exports.postSignup = (req, res, next) => {
-
     const username = req.body.username;
-    console.log(username + ' username here');
-
     const email = req.body.email;
-    console.log(email + ' email here');
-
     const password = req.body.password;
-    console.log(password + ' password here');
 
     const errors = validationResult(req);
 
     //this errors come from the routes to check if the username and email already exist and if pwd is too short
     if (!errors.isEmpty()) { 
-        console.log(errors.array());
         return res.status(422).render('auth/signup', {
             path: '/signup',
             pageTitle: 'Signup',
@@ -81,28 +73,30 @@ exports.postSignup = (req, res, next) => {
         })
         .then(result => {
             res.redirect('/login');
-           console.log(email + ' anymail here ');
             
             // Message Object
             const msg = {
                 to: email,
                 from: 'victoronyinyeme@gmail.com',
-                subject: 'Incognito Messaging' ,
+                subject: 'Anonymous Messaging' ,
                 text: 'Anonymous delivery',
                 html: `
                 <h1 style="color: #fc00ff">Welcome</h1>
-                <p>Hi there, thank you for using Incognito messaging,
-                this version is a prototype but your welcome to explore.
+                <p>Hi there, thank you for using blabme mobile first incognito messaging,
+                This is our very first launch and we hope you progress with as we keep bringing
+                cool features and services to the platform.
                 </p>
                 <br>
-                <p>Your email is secure and would not be given out</p>
+                <p>STAY ANONYMOUS!</p>
+                <span style="color:#D3D3D3; font-size: 12px;">Your email is secure and would not be given out</span>
                 <br>
-                <p>STAY ACTIVE!</p>
+
+                <p style="color:#D3D3D3; font-size: 10px;>Copyright ©2020, RC~Dev</p>
                 `
             };
             sgMail.send(msg)
                 .then(mail => {
-                    console.log('message delivered')
+                    console.log('message delivered');
                 }, error => {
                     console.log(error);
 
@@ -121,8 +115,6 @@ exports.postSignup = (req, res, next) => {
 };
 
 
-// console.log(req.get('Cookie') + ' get cookie'); //outputs undefined which means false
-// console.log(req.session);
 exports.getLogin = (req, res, next) => {
     let message = req.flash('error'); //this assigns an array to the message variable
 
@@ -137,8 +129,8 @@ exports.getLogin = (req, res, next) => {
         pageTitle: 'Login',
         errorMessage: message,
         oldInput: {
-            username: ' ', 
-            password: ' ',
+            username: '', 
+            password: '',
         },
         validationErrors: []
         // isAuthenticated: req.session.islogged
@@ -148,9 +140,6 @@ exports.getLogin = (req, res, next) => {
 
 
 exports.postLogin = (req, res, next) => {
-    // console.log(req.user + ' user req');
-    // console.log(username);
-    // console.log(password)
 
     const username = req.body.username;
     const password = req.body.password;
@@ -164,8 +153,8 @@ exports.postLogin = (req, res, next) => {
             pageTitle: 'Login',
             errorMessage: errors.array()[0].msg,
             oldInput: {
-                username: ' ', 
-                password: ' ',
+                username: '', 
+                password: '',
             },
             validationErrors: errors.array()
             // isAuthenticated: req.session.islogged
@@ -175,7 +164,6 @@ exports.postLogin = (req, res, next) => {
     Users.findOne({ username: username })
         .then(user => {
             if (!user) {
-                console.log('no user')
                 return res.status(422).render('auth/login', {
                     path: '/login',
                     pageTitle: 'Login',
@@ -191,12 +179,11 @@ exports.postLogin = (req, res, next) => {
             //If User with that username is found
             return bcrypt.compare(password, user.password)
                 .then(userMatch => {
-                    // console.log(user + ' userMatch');
                     if (userMatch) {
                       req.session.isLogged = true;
                       req.session.user = user;
                       return req.session.save(err => {
-                        // console.log(err);
+                      
                         return res.redirect('/profile')
                       });
                     };
@@ -224,7 +211,6 @@ exports.postLogin = (req, res, next) => {
 };
 
 exports.googleAuth = (req, res, next) => {
-    // console.log(req.user);
     let user = req.user;
 
     // The Lord's inspiration all through 🙏
@@ -232,7 +218,6 @@ exports.googleAuth = (req, res, next) => {
         req.session.isLogged = true;
         req.session.user = user;
         return req.session.save(err => {
-          // console.log(err);
           return res.redirect('/profile');
         })
     } else {
@@ -241,20 +226,13 @@ exports.googleAuth = (req, res, next) => {
 };
 
 exports.getProfile = (req, res, next) => {
-   
     const userdata = req.user.username;
-    console.log(userdata + ' user profile id');
-
     let fullUrl = req.protocol + '://' + req.get('host') + '/' + userdata;
-    console.log(fullUrl + ' here is the fullUrl');
    
     Users.findOne({ username: userdata })
         .then(userProfile => {
-            
-            // console.log(userProfile.username + " user's profile here");
             //this if statement won't run if the console.log method is uncommented or not removed
             if (!userProfile) { 
-                console.log("you entered if statement")
                 return res.redirect('/login');
             };
             return res.status(200).render('profile', {
@@ -272,6 +250,13 @@ exports.getProfile = (req, res, next) => {
         });
 };
 
+exports.postLogout = (req, res, next) => {
+    req.session.destroy(err => {
+        console.log(err);
+        res.redirect('/login');
+    });
+};
+
 exports.getReset = (req, res, next) => {
     let message = req.flash('error');
 
@@ -285,35 +270,40 @@ exports.getReset = (req, res, next) => {
         pageTitle: 'Password Reset',
         path: '/reset',
         errorMessage: message,
-        oldInput: ' '
+        oldInput: {
+            email: ''
+        },
+        validationErrors: []
     });
 };
 
 exports.postReset = (req, res, next) => {
     const passwordResetEmail = req.body.email;
+
     crypto.randomBytes(32, (err, buffer) => {
         if (err) {
             console.log(err);
             return res.redirect('auth/reset');
         };
 
-        // Generate a buffer string
         const token = buffer.toString('hex');
+        let username;
 
         Users.findOne({ email: passwordResetEmail })
             .then(user => {
                 if (!user) {
-                    req.flash('error', 'no account with that email found');
+                    req.flash('error', 'no user with the provided email');
                     return res.redirect('auth/reset');
-                };
+                }
+                username = user.username;
                 user.resetToken = token;
-                user.resetTokenExpiration = Date.now + 3600000;
+                user.resetTokenExpiration = Date.now() + 3600000;
                 return user.save();
             })
             .then(result => {
-                res.redirect('auth/login');
+                res.redirect('/login');
                 const msg = {
-                    to: email,
+                    to: passwordResetEmail,
                     from: 'victoronyinyeme@gmail.com',
                     subject: 'Reset Password - Incognito Messaging',
                     text: 'You requested password reset for this account',
@@ -322,15 +312,15 @@ exports.postReset = (req, res, next) => {
                     <p>Click this <a href="http://localhost:8080/reset/${token}">link</a> to set a new password.</p>
                 `
                 }
-                sgMail(msg)
+                sgMail.send(msg) //this returns a promise
                     .then(mail => {
-                        console.log('Mail delivered')
+                        console.log(`Mail delivered to ${user.useranme}`);
                     })
-            })
-            .catch(err => {
-                console.log(err);
-            });
-    });
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+    })             
 };
 
 
@@ -347,77 +337,55 @@ exports.getNewPassword= (req, res, next) => {
                 message = null;
             };
             return res.status(200).render('auth/new-password', {
-                pageTitle: 'Update New Password - Incognito',
+                pageTitle: 'blabme - Update New Password',
                 path: '/reset/:token',
-
+                errorMessage: message,
+                userId: user._id,
+                passwordToken: userToken
             })
+        })
+        .catch(err => console.log(err));
+};
 
-        }).catch()
-}
+exports.postNewPassword = (req, res, next) => {
+    const newPassword = req.body.password;
+    const passwordToken = req.body.passwordToken;
+    const userId = req.body.userId;
 
+    let resetUser;
 
+    Users.findOne({ 
+        resetToken: passwordToken,
+        resetTokenExpiration: {$gt: Date.now()},
+        _id: userId 
+    })
+    .then(user => {
+        if (!user) {
+            return res.redirect('auth/new-password')
+        };
+        
+        resetUser = user;
+        return bcrypt.hash(newPassword, 12)
+    })
+    .then(hashedPassword => {
+        resetUser.password = hashedPassword;
+        resetUser.resetToken = undefined;
+        resetUser.resetTokenExpiration = undefined;
+        return resetUser.save()
+    })
+    .then(result => {
+        res.redirect('/login');
+    })
+    .catch(err => {
+        if(!err.statusCode) {
+            err.statusCode = 500;
+        };
 
-
-
-
-
-// exports.postLogin = (req, res, next) => {
-//     const email = req.body.email;
-//     const password = req.body.password;
-//     let loggedInUser;
-
-//     Users.findOne({ email: email })
-//         .then(user => {
-//             if (!user) {
-//                 return res.status(422).render('auth/login', {
-//                     path: '/login',
-                    
-//                 })
-//                 // const error = new Error('incorrect validation');
-//                 // error.statusCode = 401; //Unauthorized error
-//                 // error.message = "The email provided is not registered";
-//                 // throw error;
-//             };
-            
-//             loggedInUser = user;
-//             return bcrypt.compare(password, user.password) //this returns a boolean
-//             .then(userPwd => {
-//                 if (!userPwd) {
-//                     const error = new Error('incorrect validation');
-//                     error.statusCode = 401 //The req sent could not be authenticated
-//                     error.message = 'Incorrect password, please try again or user forget password'
-//                     throw error;
-//                 };
-//                 console.log(loggedInUser); //Output true
-
-//                 //create a json web to for every client logging in
-//                 const token = jwt.sign(
-//                     { 
-//                         email: loggedInUser.email,
-//                         username: loggedInUser.username,
-//                         _id: loggedInUser._id 
-//                     },
-//                      'unkwownsecretkey',
-//                      { expiresIn: "1h"}
-//                     ) 
-//                 res.status(200).json({
-//                     loginMessage: `Hi ${loggedInUser.username}, Welcome back!`,
-//                     userToken: token
-//                 });
-//             })
-//         })
-//         .catch(err => {
-//             if (!err.statusCode) {
-//                 err.statusCode = 500;
-//             }
-//             next(err);
-//         })
-// };
+        next(err);
+    })
+};
 
 
-// exports.getProfile = (req, res, next) => {
-//     res.status(200).render('profile', {
-//         path: '/profile',
-//         profileName: 
-//     })
-// }
+
+
+

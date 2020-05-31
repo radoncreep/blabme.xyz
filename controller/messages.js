@@ -11,7 +11,7 @@ exports.getMessages = (req, res, next) => {
     Messages.find({ userDetails: req.user._id })
         .then(result => {
             // console.log(typeof result + ' here is result');
-            console.log('anon user ' + result )
+            // console.log('anon user ' + result )
             res.status(200).render('messages', {
                 path: '/messages',
                 pageTitle: 'Messages',

@@ -45,7 +45,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(morgan('common'));
 app.use(express.json());
 app.use(cors());
-// console.log(process.env.SECRET + "the server's secret");
 app.use(session({
     secret: process.env.SECRET,
     resave: false, 
@@ -68,7 +67,6 @@ app.use((req, res, next) => {
 
     User.findById(req.session.user._id)
         .then(user => {
-            // console.log(user);
             //storing the user object from the db to the property "user" of the req object
             req.user = user;
             next()

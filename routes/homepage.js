@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/', (req, res, next) => {
     res.render('blabme', {
-        pageTitle: 'Welcome to BlabMe',
+        pageTitle: 'Blabme - Anonymous Messaging',
         path: '/'
     });
 });

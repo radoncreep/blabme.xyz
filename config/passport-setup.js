@@ -5,8 +5,6 @@ const User = require('../models/user');
 
 require('dotenv').config();
 
-// console.log('this is client ' + process.env.CLIENTIDKEY);
-// console.log('this is client secret ' + process.env.CLIENTSECRETKEY);
 
 passport.serializeUser((user, done) => {
     done(null, user.id)
@@ -28,21 +26,17 @@ passport.use(new GoogleStrategy({
     clientSecret: process.env.CLIENTSECRETKEY
 }, (accessToken, refreshToken, profile, done) => {
     //passport callback function
-    // console.log(profile);
 
-    User.findOne({ googleId: profile.id})
+    User.findOne({ googleId: profile.id })
         .then(userMatch => {
             let username = (profile.displayName).split(' ').join('');
             let userEmail = profile.emails[0].value;
-
-            // console.log(userEmail + ' user email here from oauth');
             //retrieving user data if available in the db
 
             if (userMatch) {
                 // if user already exist
-                console.log("google user information already exist");
-                // res.redirect()
                 done(null, userMatch);
+                return res.redirect('/login');   
             } else {
                 new User({
                     username: username,
@@ -50,7 +44,6 @@ passport.use(new GoogleStrategy({
                     email: userEmail
                 }).save()
                 .then(newUser => { //retrieves all data about the new user
-                    // console.log("here is the oauth result " + result);
                     done(null, newUser);
                     const msg = {
                         to: email,

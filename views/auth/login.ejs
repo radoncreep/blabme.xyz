@@ -18,7 +18,7 @@
 				  <input class="input100 <%= validationErrors.find(e =>e.param === 'username') ? 'invalid' : '' %>"
 					   type="text" 
 					   name="username" 
-					   value = "<%= oldInput.username %>" 
+					   value = "<%=oldInput.username%>" 
 					   placeholder="Type your username" style="color: #777 !important;">
 				  <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
 				</div>
@@ -28,7 +28,7 @@
 				  <input class="input100 <%= validationErrors.find(e =>e.param === 'password') ? 'invalid' : '' %>"
 					  type="password" 
 					  name="password" 
-					  value="<%= oldInput %>" 
+					  value="<%=oldInput.password%>" 
 					  placeholder="Type your password" style="color: #777 !important;">
 				</div>	
 				
@@ -37,7 +37,7 @@
 				<% } %>
 				
 				<div class="text-right p-t-8 p-b-31">
-					<a href="#" style="color: #555">
+					<a href="/reset" style="color: #555">
 						Forgot password?
 					</a>
 				</div>

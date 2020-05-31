@@ -249,13 +249,14 @@ iframe {
   font-family: Poppins-Medium;
   font-size: 16px;
   color: #fc00ff;
-  line-height: 1.2;
-
+  line-height: 1;
   display: block;
   width: 100%;
   height: 55px;
   background: transparent;
-  padding: 0 7px 0 13px;
+  padding: 0 7px 0 7px;
+  border: 1px solid rgba(0, 0, 0, 0.247);
+  border-radius: 6px;
 }
 
 
